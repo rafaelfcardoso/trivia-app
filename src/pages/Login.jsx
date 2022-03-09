@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from '../components/Header';
 
 class Login extends React.Component {
   constructor() {
@@ -24,6 +25,7 @@ class Login extends React.Component {
     const { isBtnDisabled } = this.state;
     return (
       <section>
+        <Header />
         <form>
           <label htmlFor="playerEmail">
             <input

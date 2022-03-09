@@ -1,0 +1,12 @@
+.header {
+  align-items: center;
+  background-color: darkslategray;
+  display: flex;
+  justify-content: space-around;
+}
+
+.score-container label {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+}
