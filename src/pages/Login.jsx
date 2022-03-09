@@ -1,4 +1,5 @@
 import React from 'react';
+import '../CSS/Login.css';
 
 class Login extends React.Component {
   constructor() {
@@ -23,7 +24,13 @@ class Login extends React.Component {
   render() {
     const { isBtnDisabled } = this.state;
     return (
-      <section>
+      <section className="Login">
+        <button
+          type="button"
+          data-testid="btn-settings"
+        >
+          Configurações
+        </button>
         <form>
           <label htmlFor="playerEmail">
             <input
