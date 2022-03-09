@@ -1,11 +1,27 @@
 import React from 'react';
 
 class Login extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      name: '',
+      gravatarEmail: '',
+      isBtnDisabled: true,
+    };
+  }
+
   handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
+    this.setState(
+      { [name]: value },
+      () => {
+        const { name: nameForm, gravatarEmail } = this.state;
+        this.setState({ isBtnDisabled: nameForm === '' || gravatarEmail === '' });
+      },
+    );
   }
 
   render() {
+    const { isBtnDisabled } = this.state;
     return (
       <section>
         <form>
@@ -16,6 +32,8 @@ class Login extends React.Component {
               name="gravatarEmail"
               placeholder="Digite seu email:"
               data-testid="input-gravatar-email"
+              onChange={ this.handleChange }
+              required
             />
           </label>
           <label htmlFor="playerName">
@@ -25,9 +43,11 @@ class Login extends React.Component {
               name="name"
               placeholder="Digite seu nome:"
               data-testid="input-player-name"
+              onChange={ this.handleChange }
+              required
             />
           </label>
-          <button data-testid="btn-play" id="submitBtn" type="submit">Jogar!</button>
+          <button disabled={ isBtnDisabled } data-testid="btn-play" id="submitBtn" type="submit">Jogar!</button>
         </form>
       </section>
     );
