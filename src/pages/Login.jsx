@@ -47,7 +47,14 @@ class Login extends React.Component {
               required
             />
           </label>
-          <button disabled={ isBtnDisabled } data-testid="btn-play" id="submitBtn" type="submit">Jogar!</button>
+          <button
+            disabled={ isBtnDisabled }
+            data-testid="btn-play"
+            id="submitBtn"
+            type="submit"
+          >
+            Jogar!
+          </button>
         </form>
       </section>
     );
