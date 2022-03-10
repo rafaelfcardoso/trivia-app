@@ -6,7 +6,7 @@ class Configuration extends React.Component {
     return (
       <section className="Configuration">
         <h1 data-testid="settings-title" className="App">Configurações</h1>
-        <form>
+        <form className="form">
           <label htmlFor="categories">
             Categorias:
             <select

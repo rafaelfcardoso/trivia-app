@@ -5,3 +5,9 @@
   height: 300px;
   justify-content: space-evenly;
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+

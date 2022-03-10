@@ -38,7 +38,7 @@ class Login extends React.Component {
         >
           Configurações
         </button>
-        <form>
+        <form className="form">
           <label htmlFor="playerEmail">
             <input
               type="email"
