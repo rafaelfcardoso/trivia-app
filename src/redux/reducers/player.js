@@ -1,3 +1,5 @@
+import { SET_PLAYER } from '../actions';
+
 const INITIAL_STATE = {
   name: '',
   assertions: '',
@@ -7,7 +9,8 @@ const INITIAL_STATE = {
 
 const playerReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case '':
+  case SET_PLAYER:
+    return { ...action.payload };
   default:
     return state;
   }
