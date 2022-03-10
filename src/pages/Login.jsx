@@ -1,5 +1,5 @@
 import React from 'react';
-import '../CSS/Login.css';
+import '../css/Login.css';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import getAPIToken from '../helpers/api';
@@ -53,7 +53,7 @@ class Login extends React.Component {
   render() {
     const { isBtnDisabled } = this.state;
     return (
-      <section className="Login">
+      <section className="login">
         <button
           type="button"
           data-testid="btn-settings"
