@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import getAPIToken from '../helpers/api';
 import { isTokenExpired, setToken, getToken } from '../helpers/localStorage';
-import { tokenAction, setPlayerAction } from '../redux/actions';
+import { tokenAction, setPlayerAction, requestQuestionsApiThunk } from '../redux/actions';
 
 class Login extends React.Component {
   constructor() {
@@ -41,11 +41,13 @@ class Login extends React.Component {
           dispatch(tokenAction(token));
           dispatch(setPlayerAction({ name, gravatarEmail }));
           setToken(token);
+          dispatch(requestQuestionsApiThunk());
           history.push('/game');
         });
     } else {
       dispatch(tokenAction(getToken()));
       dispatch(setPlayerAction({ name, gravatarEmail }));
+      dispatch(requestQuestionsApiThunk());
       history.push('/game');
     }
   }
