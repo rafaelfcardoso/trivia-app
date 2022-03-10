@@ -2,11 +2,23 @@
   align-items: center;
   background-color: darkslategray;
   display: flex;
+  height: 100px;
   justify-content: space-around;
+}
+
+.player-name {
+  background-color: lightgray;
+  border-radius: 5px;
+  margin-left: 5px;
+  padding: 1px;
 }
 
 .score-container label {
   display: flex;
   flex-direction: row;
   margin: 10px;
+}
+
+.score-container div {
+  margin-left: 5px;
 }

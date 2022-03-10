@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import '../css/Header.css';
+import PropTypes from 'prop-types';
 
 class Header extends React.Component {
   constructor() {
@@ -10,6 +12,8 @@ class Header extends React.Component {
   }
 
   render() {
+    const { name } = this.props;
+    console.log(this.props);
     const { score } = this.state;
     return (
       <header className="header">
@@ -20,14 +24,15 @@ class Header extends React.Component {
             alt="player"
           />
         </div>
-        <label htmlFor="playerName">
+        <label htmlFor="playerName" data-testid="header-player-name">
           Name:
-          <input
+          <span
             data-testid="header-player-name"
+            className="player-name"
             id="playerName"
-            type="text"
-            // value={ vemDaStorePorProps }
-          />
+          >
+            { name }
+          </span>
         </label>
         <div className="score-container">
           <label htmlFor="score">
@@ -42,4 +47,12 @@ class Header extends React.Component {
   }
 }
 
-export default Header;
+const mapStateToProps = (state) => ({
+  name: state.player.name,
+});
+
+Header.propTypes = {
+  name: PropTypes.string.isRequired,
+};
+
+export default connect(mapStateToProps, null)(Header);
