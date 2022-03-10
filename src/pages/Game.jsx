@@ -15,17 +15,21 @@ class Game extends React.Component {
         </header>
         <div className="card-container">
 
-          <div>
-            <h3>Categoria</h3>
-            <p>Pergunta</p>
-          </div>
           {
             questions.map((question) => {
               if (question.type === 'multiple') {
-                return (<Multiple
-                  correctAnswer={ question.correct_answer }
-                  incorrectAnswers={ question.incorrect_answers }
-                />);
+                return (
+                  <div>
+                    <div>
+                      <h3>{ question.category}</h3>
+                      <p>{ question.question}</p>
+                    </div>
+                    <Multiple
+                      correctAnswer={ question.correct_answer }
+                      incorrectAnswers={ question.incorrect_answers }
+                    />
+                  </div>
+                );
               }
               return (<Boolean
                 correctAnswer={ question.correct_answer }
