@@ -1,6 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import '../CSS/Login.css';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import getAPIToken from '../helpers/api';
+import { isTokenExpired, setToken, getToken } from '../helpers/localStorage';
+import { tokenAction, setPlayerAction } from '../redux/actions';
 
 class Login extends React.Component {
   constructor() {
@@ -27,6 +31,25 @@ class Login extends React.Component {
     history.push('/configuration');
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const { history, dispatch } = this.props;
+    const { name, gravatarEmail } = this.state;
+    if (isTokenExpired()) {
+      getAPIToken()
+        .then((token) => {
+          dispatch(tokenAction(token));
+          dispatch(setPlayerAction({ name, gravatarEmail }));
+          setToken(token);
+          history.push('/game');
+        });
+    } else {
+      dispatch(tokenAction(getToken()));
+      dispatch(setPlayerAction({ name, gravatarEmail }));
+      history.push('/game');
+    }
+  }
+
   render() {
     const { isBtnDisabled } = this.state;
     return (
@@ -38,7 +61,7 @@ class Login extends React.Component {
         >
           Configurações
         </button>
-        <form className="form">
+        <form onSubmit={ this.handleSubmit } className="form">
           <label htmlFor="playerEmail">
             <input
               type="email"
@@ -76,7 +99,7 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  history: PropTypes.object,
+  history: PropTypes.shape({}),
 }.isRequired;
 
-export default Login;
+export default connect()(Login);
