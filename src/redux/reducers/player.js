@@ -1,13 +1,16 @@
-const INNITIAL_STATE = {
+import { SET_PLAYER } from '../actions';
+
+const INITIAL_STATE = {
   name: '',
   assertions: '',
   score: '',
   gravatarEmail: '',
 };
 
-const playerReducer = (state = INNITIAL_STATE, action) => {
+const playerReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case '':
+  case SET_PLAYER:
+    return { ...action.payload };
   default:
     return state;
   }
