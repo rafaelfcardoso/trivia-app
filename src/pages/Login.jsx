@@ -1,4 +1,5 @@
 import React from 'react';
+import '../CSS/Login.css';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import getAPIToken from '../helpers/api';
@@ -25,6 +26,11 @@ class Login extends React.Component {
     );
   }
 
+  handleConfigButton = () => {
+    const { history } = this.props;
+    history.push('/configuration');
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
     const { history, dispatch } = this.props;
@@ -47,8 +53,15 @@ class Login extends React.Component {
   render() {
     const { isBtnDisabled } = this.state;
     return (
-      <section>
-        <form onSubmit={ this.handleSubmit }>
+      <section className="Login">
+        <button
+          type="button"
+          data-testid="btn-settings"
+          onClick={ this.handleConfigButton }
+        >
+          Configurações
+        </button>
+        <form onSubmit={ this.handleSubmit } className="form">
           <label htmlFor="playerEmail">
             <input
               type="email"
