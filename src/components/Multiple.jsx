@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Multiple extends React.Component {
   shuffleQuestions = () => {
@@ -21,5 +22,10 @@ class Multiple extends React.Component {
     );
   }
 }
+
+Multiple.propTypes = {
+  correctAnswer: PropTypes.string,
+  incorrectAnswers: PropTypes.string,
+}.isRequired;
 
 export default Multiple;

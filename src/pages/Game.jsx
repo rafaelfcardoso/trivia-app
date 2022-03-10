@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Boolean from '../components/Booleans';
 import Header from '../components/Header';
 import Multiple from '../components/Multiple';
@@ -45,6 +46,10 @@ class Game extends React.Component {
     );
   }
 }
+
+Game.propTypes = {
+  questions: PropTypes.string,
+}.isRequired;
 
 const mapStateToProps = (state) => (
   {
