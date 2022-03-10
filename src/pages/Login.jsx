@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../CSS/Login.css';
 
 class Login extends React.Component {
@@ -21,6 +22,11 @@ class Login extends React.Component {
     );
   }
 
+  handleConfigButton = () => {
+    const { history } = this.props;
+    history.push('/configuration');
+  }
+
   render() {
     const { isBtnDisabled } = this.state;
     return (
@@ -28,6 +34,7 @@ class Login extends React.Component {
         <button
           type="button"
           data-testid="btn-settings"
+          onClick={ this.handleConfigButton }
         >
           Configurações
         </button>
@@ -67,5 +74,9 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  history: PropTypes.object,
+}.isRequired;
 
 export default Login;
