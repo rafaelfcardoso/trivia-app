@@ -5,16 +5,20 @@ import Boolean from '../components/Booleans';
 import Header from '../components/Header';
 import Multiple from '../components/Multiple';
 import '../css/Game.css';
+import Timer from '../components/Timer';
 
 class Game extends React.Component {
-  state = {
-    currentQuestionIndex: 0,
+  constructor() {
+    super();
+    this.state = { currentQuestionIndex: 0 };
+  }
+
+  componentDidMount() {
   }
 
   render() {
     const { questions, isFetching } = this.props;
     const { currentQuestionIndex } = this.state;
-    console.log(questions);
     return (
       <div>
         <header>
@@ -25,13 +29,16 @@ class Game extends React.Component {
             isFetching
               ? <div>Loading...</div>
               : (
-                <div>
-                  {
-                    questions[currentQuestionIndex].type === 'multiple'
-                      ? <Multiple { ...questions[currentQuestionIndex] } />
-                      : <Boolean { ...questions[currentQuestionIndex] } />
-                  }
-                </div>
+                <>
+                  <div>
+                    {
+                      questions[currentQuestionIndex].type === 'multiple'
+                        ? <Multiple { ...questions[currentQuestionIndex] } />
+                        : <Boolean { ...questions[currentQuestionIndex] } />
+                    }
+                  </div>
+                  <Timer />
+                </>
               )
           }
         </div>
