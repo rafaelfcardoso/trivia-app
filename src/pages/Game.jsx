@@ -25,12 +25,10 @@ class Game extends React.Component {
                       <h3 data-testid="question-category">{question.category}</h3>
                       <p data-testid="question-text">{question.question}</p>
                     </div>
-                    <div data-testid="answer-options">
-                      <Multiple
-                        correctAnswer={ question.correct_answer }
-                        incorrectAnswers={ question.incorrect_answers }
-                      />
-                    </div>
+                    <Multiple
+                      correctAnswer={ question.correct_answer }
+                      incorrectAnswers={ question.incorrect_answers }
+                    />
                   </div>
                 );
               }
@@ -40,12 +38,10 @@ class Game extends React.Component {
                     <h3 data-testid="question-category">{question.category}</h3>
                     <p data-testid="question-text">{question.question}</p>
                   </div>
-                  <div data-testid="answer-options">
-                    <Boolean
-                      correctAnswer={ question.correct_answer }
-                      incorrectAnswers={ question.incorrect_answers }
-                    />
-                  </div>
+                  <Boolean
+                    correctAnswer={ question.correct_answer }
+                    incorrectAnswers={ question.incorrect_answers }
+                  />
                 </div>
               );
             })

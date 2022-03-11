@@ -12,11 +12,26 @@ class Multiple extends React.Component {
     return shuffled;
   };
 
+  isAnswerCorrect = (question, index) => {
+    const { correctAnswer } = this.props;
+    if (correctAnswer === question) {
+      return 'correct-answer';
+    }
+    return `wrong-answer-${index}`;
+  }
+
   render() {
     return (
-      <div>
+      <div data-testid="answer-options">
         {this.shuffleQuestions().map(
-          (question) => <button type="button" key={ question }>{question}</button>,
+          (question, index) => (
+            <button
+              type="button"
+              key={ question }
+              data-testid={ this.isAnswerCorrect(question, index) }
+            >
+              {question}
+            </button>),
         )}
       </div>
     );

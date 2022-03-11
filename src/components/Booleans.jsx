@@ -12,7 +12,7 @@ class Boolean extends React.Component {
 
   render() {
     return (
-      <div>
+      <div data-testid="answer-options">
         <button
           data-testid={ this.isAnswerCorrect(true) }
           type="button"
