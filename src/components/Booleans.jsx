@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { setQuestionIndex } from '../redux/actions';
 
 class Boolean extends React.Component {
   isAnswerCorrect = (answer) => {
@@ -12,12 +14,18 @@ class Boolean extends React.Component {
 
   handleClick = ({ target }, answer) => {
     const { correct_answer: correctAnswer } = this.props;
-    console.log(correctAnswer, answer);
     if (correctAnswer === answer) {
       target.classList.add('correct-answer');
     } else {
       target.classList.add('wrong-answer');
     }
+    const answerButtons = target.parentNode.childNodes;
+    answerButtons[2].classList.add('next-btn-visible');
+  }
+
+  handleNextButton = () => {
+    const { currentIndex, dispatch } = this.props;
+    dispatch(setQuestionIndex(currentIndex + 1));
   }
 
   render() {
@@ -45,15 +53,28 @@ class Boolean extends React.Component {
           >
             Falso
           </button>
+          <button
+            className="next-btn"
+            data-testid="btn-next"
+            type="button"
+            name="nextBtn"
+            onClick={ this.handleNextButton }
+          >
+            Next Question
+          </button>
         </div>
       </div>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  currentIndex: state.setIndex,
+});
+
 Boolean.propTypes = {
   correctAnswer: PropTypes.string,
   incorrectAnswers: PropTypes.string,
 }.isRequired;
 
-export default Boolean;
+export default connect(mapStateToProps)(Boolean);

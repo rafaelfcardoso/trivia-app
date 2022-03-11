@@ -5,20 +5,12 @@ import Boolean from '../components/Booleans';
 import Header from '../components/Header';
 import Multiple from '../components/Multiple';
 import '../css/Game.css';
+import { setQuestionIndex } from '../redux/actions';
 import Timer from '../components/Timer';
 
 class Game extends React.Component {
-  constructor() {
-    super();
-    this.state = { currentQuestionIndex: 0 };
-  }
-
-  componentDidMount() {
-  }
-
   render() {
-    const { questions, isFetching } = this.props;
-    const { currentQuestionIndex } = this.state;
+    const { questions, isFetching, currentQuestionIndex } = this.props;
     return (
       <div>
         <header>
@@ -55,7 +47,13 @@ const mapStateToProps = (state) => (
   {
     questions: state.questions,
     isFetching: state.isFetching,
+    currentQuestionIndex: state.setIndex,
   }
 );
 
-export default connect(mapStateToProps)(Game);
+const mapDispatchToProps = (dispatch) => ({
+  dispatchCurrentQuestionIndex:
+    (currentQuestionIndex) => dispatch(setQuestionIndex(currentQuestionIndex)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Game);

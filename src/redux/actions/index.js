@@ -10,6 +10,8 @@ export const REQUEST_QUESTIONS_API = 'REQUEST_QUESTIONS_API';
 
 export const IS_FETCHING = 'IS_FETCHING';
 
+export const SET_QUESTION_INDEX = 'SET_QUESTION_INDEX';
+
 export const WARN_TIMER_OVER = 'WARN_TIMER_OVER';
 
 export const RESET_TIMER = 'RESET_TIMER';
@@ -65,3 +67,8 @@ export const requestQuestionsApiThunk = (quantity = QUANTITY_DEFAULT) => (
     dispatch(isFetchingAction(false));
   }
 );
+
+export const setQuestionIndex = (payload) => ({
+  type: SET_QUESTION_INDEX,
+  payload,
+});

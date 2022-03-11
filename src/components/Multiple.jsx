@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { setQuestionIndex } from '../redux/actions';
 
 class Multiple extends React.Component {
   shuffleAnswer = () => {
@@ -27,6 +28,7 @@ class Multiple extends React.Component {
   handleClick = ({ target }) => {
     const { correct_answer: correctAnswer } = this.props;
     const answerButtons = target.parentNode.childNodes;
+    answerButtons[4].classList.add('next-btn-visible');
 
     answerButtons.forEach((button) => {
       if (correctAnswer === button.value) {
@@ -35,6 +37,11 @@ class Multiple extends React.Component {
         button.classList.add('wrong-answer');
       }
     });
+  }
+
+  handleNextButton = () => {
+    const { currentIndex, dispatch } = this.props;
+    dispatch(setQuestionIndex(currentIndex + 1));
   }
 
   render() {
@@ -63,6 +70,15 @@ class Multiple extends React.Component {
                 </button>),
             )
           }
+          <button
+            className="next-btn"
+            data-testid="btn-next"
+            type="button"
+            name="nextBtn"
+            onClick={ this.handleNextButton }
+          >
+            Next Question
+          </button>
         </div>
       </div>
 
@@ -70,10 +86,16 @@ class Multiple extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  currentIndex: state.setIndex,
+});
+
 Multiple.propTypes = {
   correctAnswer: PropTypes.string,
   incorrectAnswers: PropTypes.string,
 }.isRequired;
+
+
 
 const mapStateToProps = (state) => (
   {
