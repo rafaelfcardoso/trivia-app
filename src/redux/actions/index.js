@@ -1,5 +1,6 @@
-import { getToken } from '../../helpers/localStorage';
+import { setToken } from '../../helpers/localStorage';
 import { QUANTITY_DEFAULT } from '../../constants';
+import { getApiToken, getApiQuestions } from '../../helpers/api';
 
 export const SET_TOKEN = 'SET_TOKEN';
 
@@ -23,11 +24,21 @@ export const requestQuestionsApi = (payload) => ({
 });
 
 export const requestQuestionsApiThunk = (quantity = QUANTITY_DEFAULT) => (
-  (dispatch) => {
-    fetch(`https://opentdb.com/api.php?amount=${quantity}&token=${getToken()}`)
-      .then((response) => response.json())
-      .then((data) => {
-        dispatch(requestQuestionsApi(data.results));
-      })
-      .catch((error) => error);
-  });
+  async (dispatch) => {
+    let token = await getApiToken();
+    dispatch(tokenAction(token));
+    setToken(token);
+
+    let data = await getApiQuestions(token, quantity);
+
+    if (data.response_code === 0) {
+      dispatch(requestQuestionsApi(data.results));
+    } else {
+      token = await getApiToken();
+      data = await getApiQuestions(token, quantity);
+      dispatch(tokenAction(token));
+      setToken(token);
+      dispatch(requestQuestionsApi(data.results));
+    }
+  }
+);
