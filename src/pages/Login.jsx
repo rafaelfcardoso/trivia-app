@@ -41,15 +41,9 @@ class Login extends React.Component {
   render() {
     const { isBtnDisabled } = this.state;
     return (
-      <section className="login">
-        <button
-          type="button"
-          data-testid="btn-settings"
-          onClick={ this.handleConfigButton }
-        >
-          Configurações
-        </button>
-        <form onSubmit={ this.handleSubmit } className="form">
+      <section className="login-page-content">
+        <h1>TRIVIA</h1>
+        <form onSubmit={ this.handleSubmit } className="login-form">
           <label htmlFor="playerEmail">
             <input
               type="email"
@@ -81,6 +75,14 @@ class Login extends React.Component {
             Jogar!
           </button>
         </form>
+        <button
+          type="button"
+          data-testid="btn-settings"
+          onClick={ this.handleConfigButton }
+          className="login-configuration-btn"
+        >
+          Configurações
+        </button>
       </section>
     );
   }
