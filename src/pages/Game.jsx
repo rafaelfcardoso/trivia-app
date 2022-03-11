@@ -7,46 +7,33 @@ import Multiple from '../components/Multiple';
 import '../css/Game.css';
 
 class Game extends React.Component {
+  state = {
+    currentQuestionIndex: 0,
+  }
+
   render() {
-    const { questions } = this.props;
+    const { questions, isFetching } = this.props;
+    const { currentQuestionIndex } = this.state;
+    console.log(questions);
     return (
       <div>
         <header>
           <Header />
         </header>
-        <div className="card-container">
-
+        <div>
           {
-            questions.map((question) => {
-              if (question.type === 'multiple') {
-                return (
-                  <div>
-                    <div>
-                      <h3 data-testid="question-category">{question.category}</h3>
-                      <p data-testid="question-text">{question.question}</p>
-                    </div>
-                    <Multiple
-                      correctAnswer={ question.correct_answer }
-                      incorrectAnswers={ question.incorrect_answers }
-                    />
-                  </div>
-                );
-              }
-              return (
-                <div key={ Math.random() }>
-                  <div>
-                    <h3 data-testid="question-category">{question.category}</h3>
-                    <p data-testid="question-text">{question.question}</p>
-                  </div>
-                  <Boolean
-                    correctAnswer={ question.correct_answer }
-                    incorrectAnswers={ question.incorrect_answers }
-                  />
+            isFetching
+              ? <div>Loading...</div>
+              : (
+                <div className="card-container">
+                  {
+                    questions[currentQuestionIndex].type === 'multiple'
+                      ? <Multiple { ...questions[currentQuestionIndex] } />
+                      : <Boolean { ...questions[currentQuestionIndex] } />
+                  }
                 </div>
-              );
-            })
+              )
           }
-
         </div>
       </div>
     );
@@ -60,7 +47,8 @@ Game.propTypes = {
 const mapStateToProps = (state) => (
   {
     questions: state.questions,
+    isFetching: state.isFetching,
   }
 );
 
-export default connect(mapStateToProps, null)(Game);
+export default connect(mapStateToProps)(Game);

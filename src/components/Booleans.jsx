@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class Boolean extends React.Component {
   isAnswerCorrect = (bool) => {
-    const { correctAnswer } = this.props;
+    const { correct_answer: correctAnswer } = this.props;
     if (correctAnswer === bool) {
       return 'correct-answer';
     }
@@ -11,20 +11,27 @@ class Boolean extends React.Component {
   }
 
   render() {
+    const { category, question: questionText } = this.props;
     return (
-      <div data-testid="answer-options">
-        <button
-          data-testid={ this.isAnswerCorrect(true) }
-          type="button"
-        >
-          Verdadeiro
-        </button>
-        <button
-          data-testid={ this.isAnswerCorrect(false) }
-          type="button"
-        >
-          Falso
-        </button>
+      <div>
+        <div>
+          <h3 data-testid="question-category">{category}</h3>
+          <p data-testid="question-text">{questionText}</p>
+        </div>
+        <div data-testid="answer-options">
+          <button
+            data-testid={ this.isAnswerCorrect(true) }
+            type="button"
+          >
+            Verdadeiro
+          </button>
+          <button
+            data-testid={ this.isAnswerCorrect(false) }
+            type="button"
+          >
+            Falso
+          </button>
+        </div>
       </div>
     );
   }

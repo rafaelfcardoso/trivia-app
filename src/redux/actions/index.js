@@ -8,6 +8,8 @@ export const SET_PLAYER = 'SET_PLAYER';
 
 export const REQUEST_QUESTIONS_API = 'REQUEST_QUESTIONS_API';
 
+export const IS_FETCHING = 'IS_FETCHING';
+
 export const tokenAction = (payload) => ({
   type: SET_TOKEN,
   payload,
@@ -23,8 +25,15 @@ export const requestQuestionsApi = (payload) => ({
   payload,
 });
 
+export const isFetchingAction = (payload) => ({
+  type: IS_FETCHING,
+  payload,
+});
+
 export const requestQuestionsApiThunk = (quantity = QUANTITY_DEFAULT) => (
   async (dispatch) => {
+    dispatch(isFetchingAction(true));
+
     let token = await getApiToken();
     dispatch(tokenAction(token));
     setToken(token);
@@ -40,5 +49,7 @@ export const requestQuestionsApiThunk = (quantity = QUANTITY_DEFAULT) => (
       setToken(token);
       dispatch(requestQuestionsApi(data.results));
     }
+
+    dispatch(isFetchingAction(false));
   }
 );

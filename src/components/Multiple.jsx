@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 
 class Multiple extends React.Component {
   shuffleQuestions = () => {
-    const { correctAnswer, incorrectAnswers } = this.props;
+    const {
+      correct_answer: correctAnswer,
+      incorrect_answers: incorrectAnswers,
+    } = this.props;
     const unshuffled = [...incorrectAnswers, correctAnswer];
     const shuffled = unshuffled
       .map((value) => ({ value, sort: Math.random() }))
@@ -13,7 +16,7 @@ class Multiple extends React.Component {
   };
 
   isAnswerCorrect = (question, index) => {
-    const { correctAnswer } = this.props;
+    const { correct_answer: correctAnswer } = this.props;
     if (correctAnswer === question) {
       return 'correct-answer';
     }
@@ -21,19 +24,29 @@ class Multiple extends React.Component {
   }
 
   render() {
+    const { category, question: questionText } = this.props;
     return (
-      <div data-testid="answer-options">
-        {this.shuffleQuestions().map(
-          (question, index) => (
-            <button
-              type="button"
-              key={ question }
-              data-testid={ this.isAnswerCorrect(question, index) }
-            >
-              {question}
-            </button>),
-        )}
+      <div>
+        <div>
+          <h3 data-testid="question-category">{category}</h3>
+          <p data-testid="question-text">{questionText}</p>
+        </div>
+        <div data-testid="answer-options">
+          {
+            this.shuffleQuestions().map(
+              (question, index) => (
+                <button
+                  type="button"
+                  key={ question }
+                  data-testid={ this.isAnswerCorrect(question, index) }
+                >
+                  {question}
+                </button>),
+            )
+          }
+        </div>
       </div>
+
     );
   }
 }
