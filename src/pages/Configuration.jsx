@@ -1,10 +1,10 @@
 import React from 'react';
-import '../CSS/Configuration.css';
+import '../css/Configuration.css';
 
 class Configuration extends React.Component {
   render() {
     return (
-      <section className="Configuration">
+      <section className="configuration">
         <h1 data-testid="settings-title" className="App">Configurações</h1>
         <form className="form">
           <label htmlFor="categories">

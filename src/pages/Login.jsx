@@ -1,10 +1,8 @@
 import React from 'react';
-import '../CSS/Login.css';
+import '../css/Login.css';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import getAPIToken from '../helpers/api';
-import { isTokenExpired, setToken, getToken } from '../helpers/localStorage';
-import { tokenAction, setPlayerAction } from '../redux/actions';
+import { setPlayerAction, requestQuestionsApiThunk } from '../redux/actions';
 
 class Login extends React.Component {
   constructor() {
@@ -35,25 +33,15 @@ class Login extends React.Component {
     event.preventDefault();
     const { history, dispatch } = this.props;
     const { name, gravatarEmail } = this.state;
-    if (isTokenExpired()) {
-      getAPIToken()
-        .then((token) => {
-          dispatch(tokenAction(token));
-          dispatch(setPlayerAction({ name, gravatarEmail }));
-          setToken(token);
-          history.push('/game');
-        });
-    } else {
-      dispatch(tokenAction(getToken()));
-      dispatch(setPlayerAction({ name, gravatarEmail }));
-      history.push('/game');
-    }
+    dispatch(setPlayerAction({ name, gravatarEmail }));
+    dispatch(requestQuestionsApiThunk());
+    history.push('/game');
   }
 
   render() {
     const { isBtnDisabled } = this.state;
     return (
-      <section className="Login">
+      <section className="login">
         <button
           type="button"
           data-testid="btn-settings"

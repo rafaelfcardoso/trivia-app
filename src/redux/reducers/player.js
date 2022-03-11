@@ -10,7 +10,7 @@ const INITIAL_STATE = {
 const playerReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case SET_PLAYER:
-    return { ...action.payload };
+    return { ...state, ...action.payload };
   default:
     return state;
   }

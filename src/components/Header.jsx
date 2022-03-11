@@ -29,9 +29,9 @@ class Header extends React.Component {
         <div className="score-container">
           <label htmlFor="score">
             <strong> Score: </strong>
-            <div data-testid="header-score" id="score">
+            <span data-testid="header-score" id="score">
               { score }
-            </div>
+            </span>
           </label>
         </div>
       </header>
