@@ -37,12 +37,12 @@ class Multiple extends React.Component {
   }
 
   render() {
-    const { category, question: questionText } = this.props;
+    const { category, question } = this.props;
     return (
       <div className="card-container">
         <div>
           <h3 data-testid="question-category">{category}</h3>
-          <p data-testid="question-text">{questionText}</p>
+          <p data-testid="question-text">{question}</p>
         </div>
         <div data-testid="answer-options" className="multiple-answer-content">
           {
