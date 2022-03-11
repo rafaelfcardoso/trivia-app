@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import Multiple from '../components/Multiple';
 import '../css/Game.css';
 import { setQuestionIndex } from '../redux/actions';
+import Timer from '../components/Timer';
 
 class Game extends React.Component {
   render() {
@@ -20,13 +21,16 @@ class Game extends React.Component {
             isFetching
               ? <div>Loading...</div>
               : (
-                <div>
-                  {
-                    questions[currentQuestionIndex].type === 'multiple'
-                      ? <Multiple { ...questions[currentQuestionIndex] } />
-                      : <Boolean { ...questions[currentQuestionIndex] } />
-                  }
-                </div>
+                <>
+                  <div>
+                    {
+                      questions[currentQuestionIndex].type === 'multiple'
+                        ? <Multiple { ...questions[currentQuestionIndex] } />
+                        : <Boolean { ...questions[currentQuestionIndex] } />
+                    }
+                  </div>
+                  <Timer />
+                </>
               )
           }
         </div>

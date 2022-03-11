@@ -45,7 +45,8 @@ class Multiple extends React.Component {
   }
 
   render() {
-    const { category, question } = this.props;
+    const { category, question, timerOver } = this.props;
+    console.log(timerOver);
     return (
       <div className="card-container">
         <div>
@@ -63,6 +64,7 @@ class Multiple extends React.Component {
                   data-testid={ this.isAnswerCorrect(answer, index) }
                   value={ answer }
                   onClick={ this.handleClick }
+                  disabled={ timerOver }
                 >
                   {answer}
                 </button>),
@@ -92,5 +94,13 @@ Multiple.propTypes = {
   correctAnswer: PropTypes.string,
   incorrectAnswers: PropTypes.string,
 }.isRequired;
+
+
+
+const mapStateToProps = (state) => (
+  {
+    timerOver: state.timerOver,
+  }
+);
 
 export default connect(mapStateToProps)(Multiple);
