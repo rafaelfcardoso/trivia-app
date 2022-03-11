@@ -10,6 +10,10 @@ export const REQUEST_QUESTIONS_API = 'REQUEST_QUESTIONS_API';
 
 export const IS_FETCHING = 'IS_FETCHING';
 
+export const WARN_TIMER_OVER = 'WARN_TIMER_OVER';
+
+export const RESET_TIMER = 'RESET_TIMER';
+
 export const tokenAction = (payload) => ({
   type: SET_TOKEN,
   payload,
@@ -28,6 +32,14 @@ export const requestQuestionsApi = (payload) => ({
 export const isFetchingAction = (payload) => ({
   type: IS_FETCHING,
   payload,
+});
+
+export const warnTimerOver = () => ({
+  type: WARN_TIMER_OVER,
+});
+
+export const resetTimer = () => ({
+  type: RESET_TIMER,
 });
 
 export const requestQuestionsApiThunk = (quantity = QUANTITY_DEFAULT) => (

@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { THOUSAND } from '../constants';
+import { warnTimerOver } from '../redux/actions';
 
 class Timer extends React.Component {
   constructor() {
@@ -14,6 +15,14 @@ class Timer extends React.Component {
 
   componentDidMount() {
     this.startTimer();
+  }
+
+  shouldComponentUpdate({ dispatch }, { seconds }) {
+    if (seconds === 0) {
+      console.log('Entrou');
+      dispatch(warnTimerOver());
+    }
+    return true;
   }
 
   startTimer() {
@@ -39,7 +48,6 @@ class Timer extends React.Component {
 
   render() {
     const { seconds } = this.state;
-    console.log(this.props);
     return (
       <div>
         <span>{seconds}</span>
@@ -48,8 +56,8 @@ class Timer extends React.Component {
   }
 }
 
-/* Timer.propTypes = {
-  questions: PropTypes.string,
-}.isRequired; */
+Timer.propTypes = {
+  dispatch: PropTypes.func,
+}.isRequired;
 
 export default connect()(Timer);

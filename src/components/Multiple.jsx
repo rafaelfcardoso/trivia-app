@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 class Multiple extends React.Component {
   shuffleAnswer = () => {
@@ -37,7 +38,8 @@ class Multiple extends React.Component {
   }
 
   render() {
-    const { category, question } = this.props;
+    const { category, question, timerOver } = this.props;
+    console.log(timerOver);
     return (
       <div className="card-container">
         <div>
@@ -55,6 +57,7 @@ class Multiple extends React.Component {
                   data-testid={ this.isAnswerCorrect(answer, index) }
                   value={ answer }
                   onClick={ this.handleClick }
+                  disabled={ timerOver }
                 >
                   {answer}
                 </button>),
@@ -72,4 +75,10 @@ Multiple.propTypes = {
   incorrectAnswers: PropTypes.string,
 }.isRequired;
 
-export default Multiple;
+const mapStateToProps = (state) => (
+  {
+    timerOver: state.timerOver,
+  }
+);
+
+export default connect(mapStateToProps)(Multiple);
