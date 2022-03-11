@@ -20,12 +20,12 @@ class Game extends React.Component {
         <header>
           <Header />
         </header>
-        <div>
+        <div className="game-content">
           {
             isFetching
               ? <div>Loading...</div>
               : (
-                <div className="card-container">
+                <div>
                   {
                     questions[currentQuestionIndex].type === 'multiple'
                       ? <Multiple { ...questions[currentQuestionIndex] } />

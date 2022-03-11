@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Multiple extends React.Component {
-  shuffleQuestions = () => {
+  shuffleAnswer = () => {
     const {
       correct_answer: correctAnswer,
       incorrect_answers: incorrectAnswers,
@@ -23,24 +23,40 @@ class Multiple extends React.Component {
     return `wrong-answer-${index}`;
   }
 
+  handleClick = ({ target }) => {
+    const { correct_answer: correctAnswer } = this.props;
+    const answerButtons = target.parentNode.childNodes;
+
+    answerButtons.forEach((button) => {
+      if (correctAnswer === button.value) {
+        button.classList.add('correct-answer');
+      } else {
+        button.classList.add('wrong-answer');
+      }
+    });
+  }
+
   render() {
     const { category, question: questionText } = this.props;
     return (
-      <div>
+      <div className="card-container">
         <div>
           <h3 data-testid="question-category">{category}</h3>
           <p data-testid="question-text">{questionText}</p>
         </div>
-        <div data-testid="answer-options">
+        <div data-testid="answer-options" className="multiple-answer-content">
           {
-            this.shuffleQuestions().map(
-              (question, index) => (
+            this.shuffleAnswer().map(
+              (answer, index) => (
                 <button
+                  className="answer"
                   type="button"
-                  key={ question }
-                  data-testid={ this.isAnswerCorrect(question, index) }
+                  key={ answer }
+                  data-testid={ this.isAnswerCorrect(answer, index) }
+                  value={ answer }
+                  onClick={ this.handleClick }
                 >
-                  {question}
+                  {answer}
                 </button>),
             )
           }

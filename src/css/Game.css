@@ -1,13 +1,51 @@
-.card-container {
+.game-content {
   align-items: center;
   display: flex;
-  flex-direction: column;
-  height: 300px;
-  justify-content: space-evenly;
+  justify-content: center;
+  min-height: 500px;
+  width: 100vw;
 }
 
-.card {
+.card-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  margin: 0 auto;
+  max-width: 80%;
 }
+
+.multiple-answer-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.boolean-answer-content {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.answer {
+  background-color: white;
+  border: 0;
+  color: #4b6587;
+  cursor: pointer;
+  display: flex;
+  margin: 8px 0;
+  padding: 16px;
+  transition: 0.3s ease;
+}
+
+.answer:hover {
+  box-shadow: 5px 5px 5px -5px gray;
+  opacity: 0.9;
+}
+
+.correct-answer {
+  border: 3px solid rgb(6, 240, 15);
+}
+
+.wrong-answer {
+  border: 3px solid red;
+}
+
