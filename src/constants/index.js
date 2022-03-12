@@ -15,6 +15,9 @@ export const CORRECT_ANSWER = 'correct-answer';
 export const WRONG_ANSWER = 'wrong-answer';
 
 export const CORRECT_ANSWER_POINTS = 10;
+
 export const SIXTY = 60;
 
 export const THOUSAND = 1000;
+
+export const LAST_QUESTION_INDEX = 4;

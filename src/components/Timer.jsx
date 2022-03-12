@@ -7,7 +7,6 @@ import { warnTimerOver } from '../redux/actions';
 class Timer extends React.Component {
   constructor() {
     super();
-    this.state = { seconds: 30 };
     this.timer = 0;
     this.startTimer = this.startTimer.bind(this);
     this.countDown = this.countDown.bind(this);
@@ -17,28 +16,33 @@ class Timer extends React.Component {
     this.startTimer();
   }
 
-  shouldComponentUpdate({ dispatch }, { seconds }) {
+  shouldComponentUpdate({ dispatch, seconds }) {
     if (seconds === 0) {
-      console.log('Entrou');
       dispatch(warnTimerOver());
+
+      const nextBtn = document.querySelector('.next-btn');
+      nextBtn.classList.add('next-btn-visible');
     }
     return true;
   }
 
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
   startTimer() {
-    const { seconds } = this.state;
+    const { seconds } = this.props;
     if (this.timer === 0 && seconds > 0) {
       this.timer = setInterval(this.countDown, THOUSAND);
     }
   }
 
   countDown() {
+    let { seconds } = this.props;
+    const { handleSeconds } = this.props;
     // Remove one second, set state so a re-render happens.
-    let { seconds } = this.state;
     seconds -= 1;
-    this.setState({
-      seconds,
-    });
+    handleSeconds(seconds);
 
     // Check if we're at zero.
     if (seconds === 0) {
@@ -47,7 +51,7 @@ class Timer extends React.Component {
   }
 
   render() {
-    const { seconds } = this.state;
+    const { seconds } = this.props;
     return (
       <div>
         <span>{seconds}</span>
