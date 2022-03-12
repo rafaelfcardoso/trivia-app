@@ -21,6 +21,9 @@ class Boolean extends React.Component {
     const { correct_answer: correctAnswer } = this.props;
     this.flagTheAnswers(target, correctAnswer);
     this.updateScore(target, correctAnswer);
+
+    const answerButtons = target.parentNode.childNodes;
+    answerButtons[2].classList.add('next-btn-visible');
   }
 
   flagTheAnswers = (target, correctAnswer) => {
@@ -41,8 +44,6 @@ class Boolean extends React.Component {
       const points = CORRECT_ANSWER_POINTS + (timer * DIFFICULTY[difficulty]);
       dispatch(updateScoreAction(points));
     }
-    const answerButtons = target.parentNode.childNodes;
-    answerButtons[2].classList.add('next-btn-visible');
   }
 
   handleNextButton = () => {
