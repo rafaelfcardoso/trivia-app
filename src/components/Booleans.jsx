@@ -1,23 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setQuestionIndex } from '../redux/actions';
+import { updateScoreAction, setQuestionIndex } from '../redux/actions';
+import {
+  CORRECT_ANSWER,
+  CORRECT_ANSWER_POINTS,
+  DIFFICULTY,
+  WRONG_ANSWER } from '../constants';
 
 class Boolean extends React.Component {
   isAnswerCorrect = (answer) => {
     const { correct_answer: correctAnswer } = this.props;
     if (correctAnswer === answer) {
-      return 'correct-answer';
+      return CORRECT_ANSWER;
     }
-    return 'wrong-answer-0';
+    return `${WRONG_ANSWER}-0`;
   }
 
-  handleClick = ({ target }, answer) => {
+  handleClick = ({ target }) => {
     const { correct_answer: correctAnswer } = this.props;
-    if (correctAnswer === answer) {
-      target.classList.add('correct-answer');
-    } else {
-      target.classList.add('wrong-answer');
+    this.flagTheAnswers(target, correctAnswer);
+    this.updateScore(target, correctAnswer);
+  }
+
+  flagTheAnswers = (target, correctAnswer) => {
+    const answerButtons = target.parentNode.childNodes;
+    answerButtons.forEach((button) => {
+      if (correctAnswer === button.value) {
+        button.classList.add(CORRECT_ANSWER);
+      } else {
+        button.classList.add(WRONG_ANSWER);
+      }
+    });
+  }
+
+  updateScore = ({ value }, correctAnswer) => {
+    const { dispatch, difficulty } = this.props;
+    if (value === correctAnswer) {
+      const timer = 10;
+      const points = CORRECT_ANSWER_POINTS + (timer * DIFFICULTY[difficulty]);
+      dispatch(updateScoreAction(points));
     }
     const answerButtons = target.parentNode.childNodes;
     answerButtons[2].classList.add('next-btn-visible');
@@ -41,7 +63,8 @@ class Boolean extends React.Component {
             className="answer"
             data-testid={ this.isAnswerCorrect('True') }
             type="button"
-            onClick={ (event) => this.handleClick(event, 'True') }
+            value="True"
+            onClick={ this.handleClick }
           >
             Verdadeiro
           </button>
@@ -49,7 +72,8 @@ class Boolean extends React.Component {
             className="answer"
             data-testid={ this.isAnswerCorrect('False') }
             type="button"
-            onClick={ (event) => this.handleClick(event, 'False') }
+            value="False"
+            onClick={ this.handleClick }
           >
             Falso
           </button>

@@ -10,6 +10,8 @@ export const REQUEST_QUESTIONS_API = 'REQUEST_QUESTIONS_API';
 
 export const IS_FETCHING = 'IS_FETCHING';
 
+export const UPDATE_SCORE = 'UPDATE_SCORE';
+
 export const SET_QUESTION_INDEX = 'SET_QUESTION_INDEX';
 
 export const WARN_TIMER_OVER = 'WARN_TIMER_OVER';
@@ -33,6 +35,11 @@ export const requestQuestionsApi = (payload) => ({
 
 export const isFetchingAction = (payload) => ({
   type: IS_FETCHING,
+  payload,
+});
+
+export const updateScoreAction = (payload) => ({
+  type: UPDATE_SCORE,
   payload,
 });
 

@@ -6,6 +6,11 @@ import isFetching from './isFetching';
 import setIndex from './setIndex';
 import timerOver from './timerOver';
 
-const rootReducer = combineReducers({ player, token, questions, isFetching, setIndex, timerOver });
+const rootReducer = combineReducers({ player,
+  token,
+  questions,
+  isFetching,
+  setIndex,
+  timerOver });
 
 export default rootReducer;

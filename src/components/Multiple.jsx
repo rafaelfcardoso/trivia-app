@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setQuestionIndex } from '../redux/actions';
+import { updateScoreAction, setQuestionIndex } from '../redux/actions';
+import {
+  CORRECT_ANSWER,
+  CORRECT_ANSWER_POINTS,
+  DIFFICULTY,
+  WRONG_ANSWER,
+} from '../constants';
 
 class Multiple extends React.Component {
   shuffleAnswer = () => {
@@ -20,23 +26,38 @@ class Multiple extends React.Component {
   isAnswerCorrect = (question, index) => {
     const { correct_answer: correctAnswer } = this.props;
     if (correctAnswer === question) {
-      return 'correct-answer';
+      return CORRECT_ANSWER;
     }
-    return `wrong-answer-${index}`;
+    return `${WRONG_ANSWER}-${index}`;
   }
 
   handleClick = ({ target }) => {
     const { correct_answer: correctAnswer } = this.props;
+    this.flagTheAnswers(target, correctAnswer);
+    this.updateScore(target, correctAnswer);
+
     const answerButtons = target.parentNode.childNodes;
     answerButtons[4].classList.add('next-btn-visible');
+  }
 
+  flagTheAnswers = (target, correctAnswer) => {
+    const answerButtons = target.parentNode.childNodes;
     answerButtons.forEach((button) => {
       if (correctAnswer === button.value) {
-        button.classList.add('correct-answer');
+        button.classList.add(CORRECT_ANSWER);
       } else {
-        button.classList.add('wrong-answer');
+        button.classList.add(WRONG_ANSWER);
       }
     });
+  }
+
+  updateScore = ({ value }, correctAnswer) => {
+    const { dispatch, difficulty } = this.props;
+    if (value === correctAnswer) {
+      const timer = 10;
+      const points = CORRECT_ANSWER_POINTS + (timer * DIFFICULTY[difficulty]);
+      dispatch(updateScoreAction(points));
+    }
   }
 
   handleNextButton = () => {
@@ -86,19 +107,14 @@ class Multiple extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  currentIndex: state.setIndex,
-});
-
 Multiple.propTypes = {
   correctAnswer: PropTypes.string,
   incorrectAnswers: PropTypes.string,
 }.isRequired;
 
-
-
 const mapStateToProps = (state) => (
   {
+    currentIndex: state.setIndex,
     timerOver: state.timerOver,
   }
 );
