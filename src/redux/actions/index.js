@@ -12,6 +12,12 @@ export const IS_FETCHING = 'IS_FETCHING';
 
 export const UPDATE_SCORE = 'UPDATE_SCORE';
 
+export const SET_QUESTION_INDEX = 'SET_QUESTION_INDEX';
+
+export const WARN_TIMER_OVER = 'WARN_TIMER_OVER';
+
+export const RESET_TIMER = 'RESET_TIMER';
+
 export const tokenAction = (payload) => ({
   type: SET_TOKEN,
   payload,
@@ -37,6 +43,14 @@ export const updateScoreAction = (payload) => ({
   payload,
 });
 
+export const warnTimerOver = () => ({
+  type: WARN_TIMER_OVER,
+});
+
+export const resetTimer = () => ({
+  type: RESET_TIMER,
+});
+
 export const requestQuestionsApiThunk = (quantity = QUANTITY_DEFAULT) => (
   async (dispatch) => {
     dispatch(isFetchingAction(true));
@@ -60,3 +74,8 @@ export const requestQuestionsApiThunk = (quantity = QUANTITY_DEFAULT) => (
     dispatch(isFetchingAction(false));
   }
 );
+
+export const setQuestionIndex = (payload) => ({
+  type: SET_QUESTION_INDEX,
+  payload,
+});

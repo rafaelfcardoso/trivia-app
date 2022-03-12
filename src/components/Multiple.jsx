@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { updateScoreAction, setQuestionIndex } from '../redux/actions';
 import {
   CORRECT_ANSWER,
   CORRECT_ANSWER_POINTS,
   DIFFICULTY,
   WRONG_ANSWER,
 } from '../constants';
-import { updateScoreAction } from '../redux/actions';
 
 class Multiple extends React.Component {
   shuffleAnswer = () => {
@@ -35,6 +35,9 @@ class Multiple extends React.Component {
     const { correct_answer: correctAnswer } = this.props;
     this.flagTheAnswers(target, correctAnswer);
     this.updateScore(target, correctAnswer);
+
+    const answerButtons = target.parentNode.childNodes;
+    answerButtons[4].classList.add('next-btn-visible');
   }
 
   flagTheAnswers = (target, correctAnswer) => {
@@ -57,8 +60,14 @@ class Multiple extends React.Component {
     }
   }
 
+  handleNextButton = () => {
+    const { currentIndex, dispatch } = this.props;
+    dispatch(setQuestionIndex(currentIndex + 1));
+  }
+
   render() {
-    const { category, question } = this.props;
+    const { category, question, timerOver } = this.props;
+    console.log(timerOver);
     return (
       <div className="card-container">
         <div>
@@ -76,11 +85,21 @@ class Multiple extends React.Component {
                   data-testid={ this.isAnswerCorrect(answer, index) }
                   value={ answer }
                   onClick={ this.handleClick }
+                  disabled={ timerOver }
                 >
                   {answer}
                 </button>),
             )
           }
+          <button
+            className="next-btn"
+            data-testid="btn-next"
+            type="button"
+            name="nextBtn"
+            onClick={ this.handleNextButton }
+          >
+            Next Question
+          </button>
         </div>
       </div>
 
@@ -93,4 +112,11 @@ Multiple.propTypes = {
   incorrectAnswers: PropTypes.string,
 }.isRequired;
 
-export default connect()(Multiple);
+const mapStateToProps = (state) => (
+  {
+    currentIndex: state.setIndex,
+    timerOver: state.timerOver,
+  }
+);
+
+export default connect(mapStateToProps)(Multiple);
