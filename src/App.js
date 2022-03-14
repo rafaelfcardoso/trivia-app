@@ -4,11 +4,13 @@ import Configuration from './pages/Configuration';
 import Login from './pages/Login';
 import Game from './pages/Game';
 import Feedback from './pages/Feedback';
+import Ranking from './pages/Ranking';
 
 class App extends React.Component {
   render() {
     return (
       <Switch>
+        <Route path="/ranking" component={ Ranking } />
         <Route path="/feedback" component={ Feedback } />
         <Route path="/configuration" component={ Configuration } />
         <Route path="/game" component={ Game } />
