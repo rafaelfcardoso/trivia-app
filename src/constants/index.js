@@ -21,3 +21,5 @@ export const SIXTY = 60;
 export const THOUSAND = 1000;
 
 export const LAST_QUESTION_INDEX = 4;
+
+export const THREE = 3;
