@@ -16,7 +16,9 @@ export const SET_QUESTION_INDEX = 'SET_QUESTION_INDEX';
 
 export const WARN_TIMER_OVER = 'WARN_TIMER_OVER';
 
-export const RESET_TIMER = 'RESET_TIMER';
+export const RESET_BUTTON_STATUS = 'RESET_BUTTON_STATUS';
+
+export const SET_ASSERTIONS = 'SET_WINS';
 
 export const tokenAction = (payload) => ({
   type: SET_TOKEN,
@@ -47,8 +49,8 @@ export const warnTimerOver = () => ({
   type: WARN_TIMER_OVER,
 });
 
-export const resetTimer = () => ({
-  type: RESET_TIMER,
+export const resetButtonStatus = () => ({
+  type: RESET_BUTTON_STATUS,
 });
 
 export const requestQuestionsApiThunk = (quantity = QUANTITY_DEFAULT) => (
@@ -77,5 +79,10 @@ export const requestQuestionsApiThunk = (quantity = QUANTITY_DEFAULT) => (
 
 export const setQuestionIndex = (payload) => ({
   type: SET_QUESTION_INDEX,
+  payload,
+});
+
+export const setAssertions = (payload) => ({
+  type: SET_ASSERTIONS,
   payload,
 });
