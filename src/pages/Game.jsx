@@ -5,7 +5,7 @@ import Boolean from '../components/Booleans';
 import Header from '../components/Header';
 import Multiple from '../components/Multiple';
 import '../css/Game.css';
-import { resetTimer, setQuestionIndex, updateScoreAction } from '../redux/actions';
+import { resetButtonStatus, setQuestionIndex, updateScoreAction } from '../redux/actions';
 import Timer from '../components/Timer';
 import {
   CORRECT_ANSWER,
@@ -67,7 +67,8 @@ class Game extends React.Component {
     const { currentQuestionIndex, dispatch, history } = this.props;
     this.hiddenNextBtn();
     dispatch(setQuestionIndex(currentQuestionIndex + 1));
-    dispatch(resetTimer());
+    dispatch(resetButtonStatus());
+    this.setState({ seconds: 30 });
     if (currentQuestionIndex === LAST_QUESTION_INDEX) {
       history.push('/feedback');
     }
