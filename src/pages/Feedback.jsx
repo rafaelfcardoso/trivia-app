@@ -5,6 +5,11 @@ import Header from '../components/Header';
 import { THREE } from '../constants';
 
 class Feedback extends React.Component {
+  handlePlayAgain = () => {
+    const { history } = this.props;
+    history.push('/');
+  }
+
   render() {
     const { assertions, score } = this.props;
     return (
@@ -30,6 +35,13 @@ class Feedback extends React.Component {
               <p data-testid="feedback-text"> Could be better...</p>
             )
           }
+          <button
+            type="button"
+            data-testid="btn-play-again"
+            onClick={ this.handlePlayAgain }
+          >
+            Jogar Novamente
+          </button>
         </div>
       </>
     );
