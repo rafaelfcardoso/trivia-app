@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updateScoreAction, setQuestionIndex } from '../redux/actions';
 import {
   CORRECT_ANSWER,
-  CORRECT_ANSWER_POINTS,
-  DIFFICULTY,
   WRONG_ANSWER } from '../constants';
 
 class Boolean extends React.Component {
@@ -17,47 +14,19 @@ class Boolean extends React.Component {
     return `${WRONG_ANSWER}-0`;
   }
 
-  handleClick = ({ target }) => {
-    const { correct_answer: correctAnswer } = this.props;
-    this.flagTheAnswers(target, correctAnswer);
-    this.updateScore(target, correctAnswer);
-
-    const answerButtons = target.parentNode.childNodes;
-    answerButtons[2].classList.add('next-btn-visible');
-  }
-
-  flagTheAnswers = (target, correctAnswer) => {
-    const answerButtons = target.parentNode.childNodes;
-    answerButtons.forEach((button) => {
-      if (correctAnswer === button.value) {
-        button.classList.add(CORRECT_ANSWER);
-      } else {
-        button.classList.add(WRONG_ANSWER);
-      }
-    });
-  }
-
-  updateScore = ({ value }, correctAnswer) => {
-    const { dispatch, difficulty } = this.props;
-    if (value === correctAnswer) {
-      const timer = 10;
-      const points = CORRECT_ANSWER_POINTS + (timer * DIFFICULTY[difficulty]);
-      dispatch(updateScoreAction(points));
-    }
-  }
-
-  handleNextButton = () => {
-    const { currentIndex, dispatch } = this.props;
-    dispatch(setQuestionIndex(currentIndex + 1));
-  }
-
   render() {
-    const { category, question: questionText } = this.props;
+    const {
+      category,
+      question,
+      timerOver,
+      correct_answer: correctAnswer,
+      handleClick,
+    } = this.props;
     return (
       <div className="card-container">
         <div>
           <h3 data-testid="question-category">{category}</h3>
-          <p data-testid="question-text">{questionText}</p>
+          <p data-testid="question-text">{question}</p>
         </div>
         <div data-testid="answer-options" className="boolean-answer-content">
           <button
@@ -65,7 +34,8 @@ class Boolean extends React.Component {
             data-testid={ this.isAnswerCorrect('True') }
             type="button"
             value="True"
-            onClick={ this.handleClick }
+            onClick={ (event) => handleClick(event, correctAnswer) }
+            disabled={ timerOver }
           >
             Verdadeiro
           </button>
@@ -74,18 +44,10 @@ class Boolean extends React.Component {
             data-testid={ this.isAnswerCorrect('False') }
             type="button"
             value="False"
-            onClick={ this.handleClick }
+            onClick={ (event) => handleClick(event, correctAnswer) }
+            disabled={ timerOver }
           >
             Falso
-          </button>
-          <button
-            className="next-btn"
-            data-testid="btn-next"
-            type="button"
-            name="nextBtn"
-            onClick={ this.handleNextButton }
-          >
-            Next Question
           </button>
         </div>
       </div>
@@ -93,13 +55,13 @@ class Boolean extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  currentIndex: state.setIndex,
-});
-
 Boolean.propTypes = {
   correctAnswer: PropTypes.string,
   incorrectAnswers: PropTypes.string,
 }.isRequired;
+
+const mapStateToProps = (state) => ({
+  timerOver: state.timerOver,
+});
 
 export default connect(mapStateToProps)(Boolean);
