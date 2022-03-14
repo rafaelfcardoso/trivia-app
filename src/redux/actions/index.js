@@ -20,6 +20,10 @@ export const RESET_BUTTON_STATUS = 'RESET_BUTTON_STATUS';
 
 export const SET_ASSERTIONS = 'SET_WINS';
 
+export const RESET_QUESTION_INDEX = 'RESET_QUESTION_INDEX';
+
+export const RESET_PLAYER = 'RESET_PLAYER';
+
 export const tokenAction = (payload) => ({
   type: SET_TOKEN,
   payload,
@@ -53,6 +57,10 @@ export const resetButtonStatus = () => ({
   type: RESET_BUTTON_STATUS,
 });
 
+export const resetPlayer = () => ({
+  type: RESET_PLAYER,
+});
+
 export const requestQuestionsApiThunk = (quantity = QUANTITY_DEFAULT) => (
   async (dispatch) => {
     dispatch(isFetchingAction(true));
@@ -80,6 +88,10 @@ export const requestQuestionsApiThunk = (quantity = QUANTITY_DEFAULT) => (
 export const setQuestionIndex = (payload) => ({
   type: SET_QUESTION_INDEX,
   payload,
+});
+
+export const resetQuestionIndex = () => ({
+  type: RESET_QUESTION_INDEX,
 });
 
 export const setAssertions = (payload) => ({

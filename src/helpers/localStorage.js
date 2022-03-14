@@ -22,3 +22,11 @@ export const isTokenExpired = () => {
   const diffInMinutes = (now - savedTokenDate) / MILLISECOND_TO_MINUTES_DIVIDER;
   return diffInMinutes > SIX_HOURS_IN_MINUTES;
 };
+
+export const getGames = () => (
+  JSON.parse(localStorage.getItem('games')) || []
+);
+
+export const setGame = (game) => {
+  localStorage.setItem('games', JSON.stringify([...getGames() || [], game]));
+};

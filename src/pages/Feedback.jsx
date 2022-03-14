@@ -1,12 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { resetQuestionIndex, resetPlayer } from '../redux/actions';
 import Header from '../components/Header';
 import { THREE } from '../constants';
 
 class Feedback extends React.Component {
   handlePlayAgain = () => {
-    const { history } = this.props;
+    const { history, dispatch } = this.props;
+    dispatch(resetQuestionIndex());
+    dispatch(resetPlayer());
     history.push('/');
   }
 
