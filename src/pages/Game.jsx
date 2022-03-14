@@ -5,7 +5,11 @@ import Boolean from '../components/Booleans';
 import Header from '../components/Header';
 import Multiple from '../components/Multiple';
 import '../css/Game.css';
-import { resetButtonStatus, setQuestionIndex, updateScoreAction } from '../redux/actions';
+import {
+  resetButtonStatus,
+  setQuestionIndex,
+  setWins,
+  updateScoreAction } from '../redux/actions';
 import Timer from '../components/Timer';
 import {
   CORRECT_ANSWER,
@@ -26,8 +30,15 @@ class Game extends React.Component {
   handleClick = ({ target }, correctAnswer) => {
     this.flagTheAnswers(target, correctAnswer);
     this.updateScore(target, correctAnswer);
-
+    this.isAnswerCorrect(target, correctAnswer);
     this.showNextBtn();
+  }
+
+  isAnswerCorrect = (target, correctAnswer) => {
+    const { dispatch } = this.props;
+    if (target.value === correctAnswer) {
+      dispatch(setWins(1));
+    }
   }
 
   showNextBtn = () => {
