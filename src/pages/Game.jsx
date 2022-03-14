@@ -8,7 +8,7 @@ import '../css/Game.css';
 import {
   resetButtonStatus,
   setQuestionIndex,
-  setWins,
+  setAssertions,
   updateScoreAction } from '../redux/actions';
 import Timer from '../components/Timer';
 import {
@@ -37,7 +37,7 @@ class Game extends React.Component {
   isAnswerCorrect = (target, correctAnswer) => {
     const { dispatch } = this.props;
     if (target.value === correctAnswer) {
-      dispatch(setWins(1));
+      dispatch(setAssertions(1));
     }
   }
 

@@ -18,7 +18,7 @@ export const WARN_TIMER_OVER = 'WARN_TIMER_OVER';
 
 export const RESET_BUTTON_STATUS = 'RESET_BUTTON_STATUS';
 
-export const SET_WINS = 'SET_WINS';
+export const SET_ASSERTIONS = 'SET_WINS';
 
 export const tokenAction = (payload) => ({
   type: SET_TOKEN,
@@ -82,7 +82,7 @@ export const setQuestionIndex = (payload) => ({
   payload,
 });
 
-export const setWins = (payload) => ({
-  type: SET_WINS,
+export const setAssertions = (payload) => ({
+  type: SET_ASSERTIONS,
   payload,
 });

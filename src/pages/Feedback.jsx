@@ -6,15 +6,25 @@ import { THREE } from '../constants';
 
 class Feedback extends React.Component {
   render() {
-    const { wins } = this.props;
+    const { assertions, score } = this.props;
     return (
       <>
         <header>
           <Header />
         </header>
         <div>
+          <p>
+            Você acertou
+            <span data-testid="feedback-total-question">{assertions}</span>
+            questões
+          </p>
+          <p>
+            Um total de
+            <span data-testid="feedback-total-score">{score}</span>
+            pontos
+          </p>
           {
-            wins >= THREE ? (
+            assertions >= THREE ? (
               <p data-testid="feedback-text">Well Done!</p>
             ) : (
               <p data-testid="feedback-text"> Could be better...</p>
@@ -27,11 +37,13 @@ class Feedback extends React.Component {
 }
 
 Feedback.propTypes = {
-  wins: PropTypes.number,
+  assertions: PropTypes.number,
+  score: PropTypes.number,
 }.isRequired;
 
 const mapStateToProps = (state) => ({
-  wins: state.player.wins,
+  score: state.player.score,
+  assertions: state.player.assertions,
 });
 
-export default connect(mapStateToProps, null)(Feedback);
+export default connect(mapStateToProps)(Feedback);
