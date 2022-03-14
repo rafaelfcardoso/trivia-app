@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Header from '../components/Header';
 
 class Feedback extends React.Component {
@@ -9,11 +10,17 @@ class Feedback extends React.Component {
           <Header />
         </header>
         <div>
-          <p data-testid="feedback-text"> Mensagem de Feedback </p>
+          <p data-testid="feedback-total-score"> Total Score </p>
+          <p data-testid="feedback-total-question"> Total Questions </p>
         </div>
       </>
     );
   }
 }
 
-export default Feedback;
+const mapStateToProps = (state) => ({
+  score: state.player.score,
+  wins: state.player.score,
+});
+
+export default connect(mapStateToProps)(Feedback);
