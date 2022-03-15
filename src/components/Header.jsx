@@ -9,30 +9,37 @@ class Header extends React.Component {
     const { name, gravatarEmail, score } = this.props;
     return (
       <header className="header">
-        <div>
-          <img
-            data-testid="header-profile-picture"
-            src={ `https://www.gravatar.com/avatar/${md5(gravatarEmail.trim().toLowerCase()).toString()}` }
-            alt="player"
-          />
-        </div>
-        <label htmlFor="playerName" data-testid="header-player-name">
-          Name:
-          <span
+        <h1 className="header-trivia-logo">TRIVIA</h1>
+        <div className="header-contents">
+          <div>
+            <img
+              data-testid="header-profile-picture"
+              src={ `https://www.gravatar.com/avatar/${md5(gravatarEmail.trim().toLowerCase().toString())}` }
+              alt="player"
+            />
+          </div>
+          <label
+            className="name-label"
+            htmlFor="playerName"
             data-testid="header-player-name"
-            className="player-name"
-            id="playerName"
           >
-            { name }
-          </span>
-        </label>
-        <div className="score-container">
-          <label htmlFor="score">
-            <strong> Score: </strong>
-            <span data-testid="header-score" id="score">
-              { score }
+            <strong>Name:</strong>
+            <span
+              data-testid="header-player-name"
+              className="player-name"
+              id="playerName"
+            >
+              { name }
             </span>
           </label>
+          <div className="score-container">
+            <label htmlFor="score">
+              <strong> Score: </strong>
+              <span data-testid="header-score" id="score">
+                { score }
+              </span>
+            </label>
+          </div>
         </div>
       </header>
     );
