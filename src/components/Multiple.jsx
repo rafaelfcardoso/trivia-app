@@ -42,7 +42,7 @@ class Multiple extends React.Component {
       <div className="card-container">
         <div>
           <h3 data-testid="question-category">{category}</h3>
-          <p data-testid="question-text" dangerouslySetInnerHTML={{__html: clean}}></p>
+          <p data-testid="question-text" dangerouslySetInnerHTML={ { __html: clean } } />
         </div>
         <div data-testid="answer-options" className="multiple-answer-content">
           {
