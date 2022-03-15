@@ -1,6 +1,6 @@
 import { IS_FETCHING } from '../actions';
 
-const INITIAL_STATE = false;
+const INITIAL_STATE = true;
 
 const isFetchingReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {

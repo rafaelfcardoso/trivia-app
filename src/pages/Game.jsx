@@ -17,6 +17,7 @@ import {
   DIFFICULTY,
   LAST_QUESTION_INDEX,
   WRONG_ANSWER } from '../constants';
+import { setGame } from '../helpers/localStorage';
 
 class Game extends React.Component {
   state = {
@@ -54,8 +55,6 @@ class Game extends React.Component {
   flagTheAnswers = (target, correctAnswer) => {
     const answerButtons = target.parentNode.childNodes;
     answerButtons.forEach((button) => {
-      console.log(button.value);
-      console.log(correctAnswer);
       if (correctAnswer === button.value) {
         button.classList.add(CORRECT_ANSWER);
       } else {
@@ -75,12 +74,17 @@ class Game extends React.Component {
   }
 
   handleNextButton = () => {
-    const { currentQuestionIndex, dispatch, history } = this.props;
+    const { currentQuestionIndex, dispatch, history, player } = this.props;
     this.hiddenNextBtn();
     dispatch(setQuestionIndex(currentQuestionIndex + 1));
     dispatch(resetButtonStatus());
     this.setState({ seconds: 30 });
     if (currentQuestionIndex === LAST_QUESTION_INDEX) {
+      setGame({
+        name: player.name,
+        score: player.score,
+        gravatarEmail: player.gravatarEmail,
+      });
       history.push('/feedback');
     }
   }
@@ -150,6 +154,7 @@ const mapStateToProps = (state) => (
     questions: state.questions,
     isFetching: state.isFetching,
     currentQuestionIndex: state.setIndex,
+    player: state.player,
   }
 );
 
