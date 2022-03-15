@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import sanitizeHtml from 'sanitize-html';
 import {
   CORRECT_ANSWER,
   WRONG_ANSWER,
@@ -36,11 +37,12 @@ class Multiple extends React.Component {
       correct_answer: correctAnswer,
       handleClick,
     } = this.props;
+    const clean = sanitizeHtml(question);
     return (
       <div className="card-container">
         <div>
           <h3 data-testid="question-category">{category}</h3>
-          <p data-testid="question-text">{question}</p>
+          <p data-testid="question-text" dangerouslySetInnerHTML={{__html: clean}}></p>
         </div>
         <div data-testid="answer-options" className="multiple-answer-content">
           {
