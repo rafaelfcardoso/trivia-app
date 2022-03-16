@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { THOUSAND } from '../constants';
-import { warnTimerOver } from '../redux/actions';
+import { INITIAL_TIMER, THOUSAND } from '../constants';
+import { resetButtonStatus, warnTimerOver } from '../redux/actions';
 import '../css/Timer.css';
 
 class Timer extends React.Component {
@@ -20,9 +20,15 @@ class Timer extends React.Component {
   shouldComponentUpdate({ dispatch, seconds }) {
     if (seconds === 0) {
       dispatch(warnTimerOver());
-
+      this.stopTimer();
       const nextBtn = document.querySelector('.next-btn');
       nextBtn.classList.add('next-btn-visible');
+    }
+    if (seconds === INITIAL_TIMER) {
+      dispatch(resetButtonStatus());
+      if (this.timer === 0 && seconds > 0) {
+        this.timer = setInterval(this.countDown, THOUSAND);
+      }
     }
     return true;
   }
@@ -38,17 +44,17 @@ class Timer extends React.Component {
     }
   }
 
+  stopTimer() {
+    clearInterval(this.timer);
+    this.timer = 0;
+  }
+
   countDown() {
     let { seconds } = this.props;
     const { handleSeconds } = this.props;
     // Remove one second, set state so a re-render happens.
     seconds -= 1;
     handleSeconds(seconds);
-
-    // Check if we're at zero.
-    if (seconds === 0) {
-      clearInterval(this.timer);
-    }
   }
 
   render() {

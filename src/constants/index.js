@@ -25,3 +25,5 @@ export const LAST_QUESTION_INDEX = 4;
 export const THREE = 3;
 
 export const SORT_NEGATIVE_NUMBER = -1;
+
+export const INITIAL_TIMER = 30;
