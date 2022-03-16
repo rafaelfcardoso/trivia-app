@@ -4,6 +4,7 @@ import md5 from 'crypto-js/md5';
 import { getGames } from '../helpers/localStorage';
 import { resetPlayer, resetQuestionIndex } from '../redux/actions';
 import '../css/Ranking.css';
+import { SORT_NEGATIVE_NUMBER } from '../constants';
 // import PropTypes from 'prop-types';
 
 class Ranking extends React.Component {
@@ -12,7 +13,6 @@ class Ranking extends React.Component {
   }
 
   componentDidMount() {
-    const SORT_NEGATIVE_NUMBER = -1;
     const games = getGames();
     games.sort((a, b) => {
       if (a.score > b.score) return SORT_NEGATIVE_NUMBER;

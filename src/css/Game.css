@@ -50,17 +50,30 @@
   border: 3px solid red;
 }
 
+.next-btn-container {
+  display: flex;
+  justify-content: end;
+  margin: 0 auto;
+  max-width: 80%;
+}
+
 .next-btn {
   display: none;
 }
 
 .next-btn-visible {
   align-items: center;
-  border: 1px solid #4b6587;
+  background-color: #4b6587;
+  border: 0;
   border-radius: 5px;
+  color: white;
   display: flex;
   font-weight: 550;
-  height: 30px;
-  width: 100px;
+  margin-top: 8px;
+  padding: 12px 16px;
+}
+
+.next-btn-visible:hover {
+  opacity: 0.9;
 }
 

@@ -23,3 +23,5 @@ export const THOUSAND = 1000;
 export const LAST_QUESTION_INDEX = 4;
 
 export const THREE = 3;
+
+export const SORT_NEGATIVE_NUMBER = -1;

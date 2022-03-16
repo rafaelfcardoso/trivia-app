@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { THOUSAND } from '../constants';
 import { warnTimerOver } from '../redux/actions';
+import '../css/Timer.css';
 
 class Timer extends React.Component {
   constructor() {
@@ -53,8 +54,8 @@ class Timer extends React.Component {
   render() {
     const { seconds } = this.props;
     return (
-      <div>
-        <span>{seconds}</span>
+      <div className="timer-container">
+        <span className="timer">{seconds}</span>
       </div>
     );
   }
