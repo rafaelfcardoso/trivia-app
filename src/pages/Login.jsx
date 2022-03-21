@@ -2,7 +2,9 @@ import React from 'react';
 import '../css/Login.css';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { GrConfigure } from 'react-icons/gr';
 import { setPlayerAction, requestQuestionsApiThunk } from '../redux/actions';
+import logo from '../img/trivia-logo.svg';
 
 class Login extends React.Component {
   constructor() {
@@ -42,7 +44,9 @@ class Login extends React.Component {
     const { isBtnDisabled } = this.state;
     return (
       <section className="login-page-content">
-        <h1>TRIVIA</h1>
+        <h1>
+          <img src={ logo } alt="TRIVIA LOGO" className="login-logo" />
+        </h1>
         <form onSubmit={ this.handleSubmit } className="login-form">
           <label htmlFor="playerEmail">
             <input
@@ -82,6 +86,8 @@ class Login extends React.Component {
           className="login-configuration-btn"
         >
           Configurações
+          {' '}
+          <GrConfigure />
         </button>
       </section>
     );
