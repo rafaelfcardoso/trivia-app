@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { BsArrowRight } from 'react-icons/bs';
 import PropTypes from 'prop-types';
 import Boolean from '../components/Booleans';
 import Header from '../components/Header';
 import Multiple from '../components/Multiple';
-import '../css/Game.css';
 import {
-  resetButtonStatus,
   setQuestionIndex,
   setAssertions,
   updateScoreAction } from '../redux/actions';
@@ -15,9 +14,11 @@ import {
   CORRECT_ANSWER,
   CORRECT_ANSWER_POINTS,
   DIFFICULTY,
+  INITIAL_TIMER,
   LAST_QUESTION_INDEX,
   WRONG_ANSWER } from '../constants';
 import { setGame } from '../helpers/localStorage';
+import '../css/Game.css';
 
 class Game extends React.Component {
   state = {
@@ -77,8 +78,7 @@ class Game extends React.Component {
     const { currentQuestionIndex, dispatch, history, player } = this.props;
     this.hiddenNextBtn();
     dispatch(setQuestionIndex(currentQuestionIndex + 1));
-    dispatch(resetButtonStatus());
-    this.setState({ seconds: 30 });
+    this.handleSeconds(INITIAL_TIMER);
     if (currentQuestionIndex === LAST_QUESTION_INDEX) {
       setGame({
         name: player.name,
@@ -127,19 +127,23 @@ class Game extends React.Component {
                       )
                   }
                   <Timer seconds={ seconds } handleSeconds={ this.handleSeconds } />
+                  <div className="next-btn-container">
+                    <button
+                      className="next-btn"
+                      data-testid="btn-next"
+                      type="button"
+                      name="nextBtn"
+                      onClick={ this.handleNextButton }
+                    >
+                      Next Question
+                      {' '}
+                      <BsArrowRight />
+                    </button>
+                  </div>
                 </div>
               )
           }
         </div>
-        <button
-          className="next-btn"
-          data-testid="btn-next"
-          type="button"
-          name="nextBtn"
-          onClick={ this.handleNextButton }
-        >
-          Next Question
-        </button>
       </div>
     );
   }
