@@ -9,7 +9,7 @@ This Trivia is a mobile first web app that offers the following features:
 ## Used technologies
 
 Front-end:
-> Developed with:
+
   - React
   - Redux
   - CSS3
