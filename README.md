@@ -20,16 +20,16 @@ Front-end:
 
 ## Installing the dependencies
 
-## Executando aplicação
-* Para rodar o front-end:
+## Executing the app
+* To run the front-end:
 
   ```
     cd src/ && npm start
   ```
 
-## Executando Testes
+## Executing tests
 
-* Para rodar todos os testes:
+* To run all the tests:
 
   ```
     npm test
