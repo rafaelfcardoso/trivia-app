@@ -1,10 +1,10 @@
 # Trivia App
 This Trivia is a mobile first web app that offers the following features:
-  - Log into the game and, if the email is registered on the [Gravatar] website (https://pt.gravatar.com/), have your photo associated with the user's profile.
-    - Access a page related to the game, where you must choose one of the available answers for each question of the questions. The answer must be checked before the timer reaches zero, otherwise the answer must be considered wrong.
-    - Be redirected, after 5 questions answered, to the score screen, where the text depends on the number of hits.
-    - Display a ranking page, if you like, at the end of each game.
-    - Configure some options for the game in a configuration screen accessible from the application header.
+  - Loggin to the game and, if the email is registered on the Gravatar website (https://pt.gravatar.com/), have your photo associated with as the user's profile.
+  - The game screen, where the user will be challenged with multiple and boolean questions. The answer must be checked before the timer reaches zero, otherwise the answer is considered wrong.
+  - After 5 questions answered, it redirects to the score screen.
+  - A ranking page at the end of each game.
+  - Options for the game in a configuration screen accessible from the application header.
 
 ## Used technologies
 
